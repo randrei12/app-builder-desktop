@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    --border-gray-color: rgb(184, 184, 184);
+    /* color pallete */
+    --color1: rgb(232, 249, 253);
+    --color1-hover: rgb(209, 220, 223);
+    --color1-active: rgb(179, 189, 192);
+    --color2: rgb(121, 218, 232);
+    --color3: rgb(10, 161, 221);
+    --color3-hover: rgb(7, 140, 192);
+    --color3-active: rgb(6, 102, 139);
+    --color4: rgb(33, 85, 205);
+    --project-base-color: #EFEFEF;
+    --project-secondary-color: #dbdbdb;
+    --project-footer-color: #ececec;
+    --project-footer-button: #1d1d1d;
+    --project-border: #00000040;
+}
+
+body {
+    background: #F8F9FB;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
