@@ -1,12 +1,19 @@
-const { app, BrowserWindow, systemPreferences } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 require('dotenv').config();
+const fetch = require('node-fetch');
 
 function createWindow() {
     const win = new BrowserWindow({
+        minWidth: 850,
+        minHeight: 545,
         width: 900,
         height: 600,
+        frame: false,
+        movable: true,
         webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
     });
@@ -14,7 +21,6 @@ function createWindow() {
     else win.loadURL('http://localhost:3000');
 
     win.setMenuBarVisibility(false);
-    win.setBackgroundColor('#56cc5b10')
     // win.openDevTools();
 }
 
@@ -23,13 +29,21 @@ app.whenReady().then(() => {
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
+            createWindow();
         }
-    })
-})
+    });                 
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
-})
+});
+
+ipcMain.handle('quitProgram', app.quit);
+ipcMain.handle('fetch', async (e, args) => {
+    let res = await fetch(...args);
+    let { status, statusText } = res;
+    let text = await res.text();
+    return { status, statusText, text };
+});
