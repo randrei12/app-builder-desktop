@@ -1,0 +1,33 @@
+.titleBar {
+    height: 30px;
+    -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #e8e9ec;
+
+    img {
+        padding: 5px;
+        height: 100%;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    button {
+        -webkit-app-region: no-drag;
+        height: 100%;
+        width: 45px;
+        background: transparent;
+        border: none;
+        outline: none;
+
+        &:hover {
+            color: white;
+            background: red;
+        }
+    }
+}
