@@ -24,7 +24,7 @@
     "homepage": "https://github.com/randrei12/app-builder-desktop#readme",
     "dependencies": {
         "blockly": "^9.0.1",
-        "electron": "^21.3.0",
+        "electron": "^22.0.0",
         "node-fetch": "^2.6.7",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
