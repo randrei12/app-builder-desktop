@@ -1,0 +1,31 @@
+.searchDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 15px;
+
+    .searchInput {
+        border: 1px solid var(--project-border);
+        border-radius: 10px;
+        overflow: hidden;
+        background: white;
+        height: 40px;
+        width: 400px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        i {
+            margin: 0 10px;
+        }
+
+        input {
+            border: none;
+            height: 100%;
+            width: 100%;
+            border-radius: 0px;
+            outline: none;
+            font-size: 18px;
+        }
+    }
+}

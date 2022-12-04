@@ -5,7 +5,9 @@ import './main.scss';
 import './scss/components/scrollBar.scss';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    +import.meta.env.VITE_PRODUCTION ? 
+    <App /> :
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 )

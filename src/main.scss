@@ -2,7 +2,6 @@
 
 :root {
     --border-gray-color: rgb(184, 184, 184);
-    /* color pallete */
     --color1: rgb(232, 249, 253);
     --color1-hover: rgb(209, 220, 223);
     --color1-active: rgb(179, 189, 192);
@@ -19,14 +18,23 @@
 }
 
 body {
-    background: #F8F9FB;
+    background: transparent;
     margin: 0;
     padding: 0;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+#root {
+    background: #F8F9FB;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--project-secondary-color);
 }
 
 * {

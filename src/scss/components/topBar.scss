@@ -36,20 +36,6 @@
         }
     }
 
-    .current {
-        border: none;
-        color: white;
-        background: var(--color3);
-
-        &:hover {
-            background: var(--color3-hover);
-        }
-
-        &:active {
-            background: var(--color3-active);
-        }
-    }
-
     img {
         height: 100%;
         cursor: pointer;

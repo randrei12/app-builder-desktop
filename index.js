@@ -5,11 +5,12 @@ const fetch = require('node-fetch');
 
 function createWindow() {
     const win = new BrowserWindow({
-        minWidth: 850,
-        minHeight: 545,
-        width: 900,
-        height: 600,
+        minWidth: 830,
+        minHeight: 500,
+        width: 880,
+        height: 550,
         frame: false,
+        transparent: true,
         movable: true,
         webPreferences: {
             nodeIntegration: true,
@@ -19,7 +20,6 @@ function createWindow() {
     });
     if (process.env.PRODUCTION == 1) win.loadFile('dist/index.html');
     else win.loadURL('http://localhost:3000');
-
     win.setMenuBarVisibility(false);
     // win.openDevTools();
 }
