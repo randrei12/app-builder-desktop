@@ -13,7 +13,6 @@ function createWindow() {
         transparent: true,
         movable: true,
         webPreferences: {
-            nodeIntegration: true,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
