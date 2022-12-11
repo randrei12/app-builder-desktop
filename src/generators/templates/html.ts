@@ -1,4 +1,5 @@
 const html_template = `
+    <!DOCTYPE html>
     <style>
         * {
             box-sizing: border-box;
