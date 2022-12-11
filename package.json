@@ -21,13 +21,14 @@
     "bugs": {
         "url": "https://github.com/randrei12/app-builder-desktop/issues"
     },
-    "homepage": "https://github.com/randrei12/app-builder-desktop#readme",
+    "homepage": "./",
     "dependencies": {
         "blockly": "^9.0.1",
         "electron": "^22.0.0",
         "node-fetch": "^2.6.7",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "sweetalert2": "^11.6.15"
     },
     "devDependencies": {
         "@types/node": "^18.11.7",
@@ -36,6 +37,7 @@
         "@vitejs/plugin-react": "^2.2.0",
         "concurrently": "^7.5.0",
         "dotenv": "^16.0.3",
+        "electron-log": "^4.4.8",
         "nodemon": "^2.0.20",
         "react-router-dom": "^6.4.4",
         "sass": "^1.56.1",

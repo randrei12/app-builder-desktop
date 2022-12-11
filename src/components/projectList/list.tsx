@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../../scss/components/projectList/list.scss';
 
@@ -33,10 +34,10 @@ function List() {
                 }
                 {loaded && projects.map(project => (
                     <div className="project" key={project._id}>
-                        <div className="header">
+                        <Link to={`/projects/${project._id}`} style={{ textDecoration: 'none', color: 'inherit' }} className="header">
                             <img src="/assets/icon.png" alt="" />
                             <h1>{project.title}</h1>
-                        </div>
+                        </Link>
                         <div className="footer">
                             <div>
                                 <div></div>

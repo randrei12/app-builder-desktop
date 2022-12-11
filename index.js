@@ -2,9 +2,15 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 require('dotenv').config();
 const fetch = require('node-fetch');
+let win;
 
-function createWindow() {
-    const win = new BrowserWindow({
+//dev
+const log = require('electron-log');
+const { session } = require('electron');
+
+
+function createWindow({ route = '' }) {
+    win = new BrowserWindow({
         minWidth: 830,
         minHeight: 500,
         width: 880,
@@ -17,21 +23,49 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-    if (process.env.PRODUCTION == 1) win.loadFile('dist/index.html');
-    else win.loadURL('http://localhost:3000');
+    if (process.env.VITE_PRODUCTION == 1) win.loadFile(`dist/index.html/${route}`);
+    else win.loadURL(`http://localhost:3000/${route}`);
     win.setMenuBarVisibility(false);
     // win.openDevTools();
 }
 
-app.whenReady().then(() => {
-    createWindow()
 
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
+//registering protocol so the program will be able to launch from a website
+if (process.defaultApp) {
+    if (process.argv.length >= 2)
+        app.setAsDefaultProtocolClient('builder', process.execPath, [path.resolve(process.argv[1])]);
+} else app.setAsDefaultProtocolClient('builder');
+
+
+if (!app.requestSingleInstanceLock()) {
+    app.quit()
+} else {
+    app.on('second-instance', () => {
+        if (win) {
+            if (win.isMinimized()) win.restore();
+            win.focus();
         }
-    });                 
-});
+    })
+    
+    app.whenReady().then(() => {
+        // session.web.enableNetworkEmulation({
+        //     offline: true,
+        //   });
+        let route;
+        if (process.argv[2] && process.argv[2].startsWith('builder://')) {
+            route = process.argv[2].replace('builder:///', '').replace('builder://', '');
+        }
+
+        app.on('activate', () => {
+            if (BrowserWindow.getAllWindows().length === 0) {
+                createWindow({ route });
+            }
+        });
+
+        createWindow({ route });
+        win.webContents.session.enableNetworkEmulation({ offline: true })
+    });
+}
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

@@ -1,0 +1,51 @@
+@mixin flex($direction, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    gap: $gap;
+}
+
+.buildTitle {
+    text-align: left;
+    margin: 5px;
+    font-size: 30px;
+}
+
+.BuildOptions {
+    text-align: left;
+    @include flex($direction: column, $gap: 15px);
+    
+    .buildSection {
+        @include flex($direction: column, $gap: 5px);
+        padding: 5px;
+
+        span {
+            font-size: 25px;
+        }
+
+        div {
+            @include flex($direction: row, $gap: 10px);
+            padding: 0 5px;
+
+            button {
+                @include flex($direction: row, $gap: 5px);
+                white-space: nowrap;
+                font-size: 15px;
+                border: none;
+                border-radius: 20px;
+                color: rgba(255, 255, 255, 0.9);
+                background: var(--color3);
+                padding: 10px;
+                transition: background 0.1s ease-in-out;
+
+                &:hover {
+                    background: var(--color3-hover);
+                    cursor: pointer;
+                }
+
+                &:active {
+                    background: var(--color3-active);
+                }
+            }
+        }
+    }
+}

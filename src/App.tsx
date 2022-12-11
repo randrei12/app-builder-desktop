@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TitleBar from './components/titleBar';
 import TopBar from './components/topBar';
-import Search from './components/projectList/search';
-import List from './components/projectList/list';
+import ProjectList from './pages/projectList';
+import Project from './pages/project';
 
 declare global {
     interface Window {
@@ -35,12 +35,9 @@ function App() {
             <TitleBar />
             <TopBar />
             <Routes>
-                <Route path='/' element={
-                    <>
-                        <Search />
-                        <List />
-                    </>
-                } />
+                <Route path='/' element={<ProjectList />} />
+                <Route path='/projects/:id' element={<Project />} />
+                <Route path='*' element={<h1>Error</h1>} />
             </Routes>
         </BrowserRouter>
     );
