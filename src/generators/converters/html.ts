@@ -1,9 +1,11 @@
 import html_template from "../templates/html";
+import { specialTypes } from './html/types';
 
 interface HTMLConverter {
     setTarget: (param: any) => void;
     setJavaScript: (code: any) => void;
     convert: () => void;
+    generateDropped: ({ childs, id, name, styles, type, text }: { childs: object[]; id: string; name: string; styles: object; type: string; text: string; }) => HTMLElement;
 }
 
 function droppedToElem(elem: any) {
@@ -26,6 +28,12 @@ class HTMLConverter {
             const data = droppedToElem(target);
             let code = html_template + data.outerHTML + javascript;
             return code;    
+        }
+
+        this.generateDropped = ({ childs, id, name, styles, type, text }) => {
+            let element: HTMLElement = document.createElement(specialTypes[type as keyof object] || type);
+            if (text) element.innerText = text;
+            return element;
         }
 
         this.setJavaScript = code => javascript = `<script type="module">${code}</script>`;

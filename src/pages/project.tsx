@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import GenerateProject from '../generators/generate';
+import ProjectGenerator from '../generators/generate';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../hooks/context';
@@ -31,7 +31,8 @@ function Project() {
     }
 
     function build(e: any) {
-        let generator = new GenerateProject({ platform: e.target.parentElement.dataset.platform });
+        let generator = new ProjectGenerator({ platform: e.target.parentElement.dataset.platform, project });
+        generator.build();
     }
 
     return (
