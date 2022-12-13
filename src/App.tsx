@@ -9,6 +9,10 @@ declare global {
         electron: {
             quit: () => void;
             fetch: (...args: any[]) => any;
+            isPath: (path: string) => boolean;
+            path: any;
+            userData: string;
+            makePath(path: string, obj?: object): void;
         }
     }
 

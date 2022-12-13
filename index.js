@@ -19,14 +19,17 @@ function createWindow({ route = '' }) {
         transparent: true,
         movable: true,
         webPreferences: {
-            contextIsolation: true,
+            nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
         }
     });
     if (process.env.VITE_PRODUCTION == 1) win.loadFile(`dist/index.html/${route}`);
-    else win.loadURL(`http://localhost:3000/${route}`);
+    else { 
+        win.loadURL(`http://localhost:3000/${route}`);
+        win.openDevTools();
+        win.setSize(1200, 550)
+    }
     win.setMenuBarVisibility(false);
-    // win.openDevTools();
 }
 
 
@@ -80,3 +83,5 @@ ipcMain.handle('fetch', async (e, args) => {
     let text = await res.text();
     return { status, statusText, text };
 });
+ipcMain.handle('userData', () => app.getPath('userData'));
+ipcMain.handle('path', () => path);

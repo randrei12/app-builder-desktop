@@ -10,7 +10,7 @@ interface ProjectGenerator {
 }
 
 class ProjectGenerator {
-    constructor({ platform: plat, project }: { platform: string, project: { [key: string]: any } }) {
+    constructor({ platform: plat, project, id }: { platform: string, project: { [key: string]: any }, id: string }) {
         let platform: object;
         switch (plat) {
             case 'web':
@@ -45,10 +45,25 @@ class ProjectGenerator {
                 return;
             }
 
+            //generating html code
             let html = new HTMLConverter();
-            html.setTarget(design);
+            html.setTarget(html.generateDropped(design));
+            let htmlCode = html.convert();
+
+            //creating project path
+            let path = localStorage.getItem('projects_path') || window.electron.userData;
+            let projectPath = window.electron.path.join(path, 'projects', id);
+            if (!path || !window.electron.isPath(projectPath)) {
+                window.electron.makePath(projectPath, { recursive: true });
+                localStorage.setItem('projects_path', projectPath);
+            }
+            console.log(projectPath);
+            
+            
     
             console.log(design, blocks);
+            console.log(htmlCode);
+            
         }
     }
 }

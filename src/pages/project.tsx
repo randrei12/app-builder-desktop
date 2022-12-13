@@ -31,7 +31,7 @@ function Project() {
     }
 
     function build(e: any) {
-        let generator = new ProjectGenerator({ platform: e.target.parentElement.dataset.platform, project });
+        let generator = new ProjectGenerator({ platform: e.target.parentElement.dataset.platform, project, id: id as string });
         generator.build();
     }
 

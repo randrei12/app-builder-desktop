@@ -11,7 +11,7 @@ class JSConverter {
     constructor() {
         let template: template;
 
-        this.setTemplate = (temp: template) => template = temp
+        this.setTemplate = (temp: template) => template = temp;
         this.convert = ({js, workspace}) => {
             let code = '';
             template.nodes.forEach(node => {
