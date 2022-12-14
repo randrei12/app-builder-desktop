@@ -11,7 +11,7 @@ interface ProjectGenerator {
 
 class ProjectGenerator {
     constructor({ platform: plat, project, id }: { platform: string, project: { [key: string]: any }, id: string }) {
-        let platform: object;
+        let platform: { [key: string]: any };
         switch (plat) {
             case 'web':
                 platform = web;
@@ -39,11 +39,13 @@ class ProjectGenerator {
             } catch {
                 Swal.fire({
                     title: 'Error',
-                    text: 'The project couldn\'t be built',
+                    text: "The project couldn't be built",
                     icon: 'error'
                 })
                 return;
             }
+
+            console.log(blocks);
 
             //generating html code
             let html = new HTMLConverter();
@@ -53,11 +55,14 @@ class ProjectGenerator {
             //creating project path
             let path = localStorage.getItem('projects_path') || window.electron.userData;
             let projectPath = window.electron.path.join(path, 'projects', id);
+            console.log(path, projectPath);
             if (!path || !window.electron.isPath(projectPath)) {
                 window.electron.makePath(projectPath, { recursive: true });
-                localStorage.setItem('projects_path', projectPath);
+                localStorage.setItem('projects_path', path);
             }
-            console.log(projectPath);
+
+            //creating files
+            platform.createFiles(projectPath, htmlCode);
             
             
     

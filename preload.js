@@ -12,6 +12,7 @@ const path = require('path');
         path: () => ipcRenderer.invoke('path'),
         isPath: fs.existsSync,
         makePath: fs.mkdirSync,
+        createFile: fs.writeFileSync,
         userData,
         path
     });

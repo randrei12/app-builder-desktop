@@ -13,6 +13,7 @@ declare global {
             path: any;
             userData: string;
             makePath(path: string, obj?: object): void;
+            createFile(file: string, data: string): void;
         }
     }
 
