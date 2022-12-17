@@ -1,6 +1,8 @@
+import { javascriptGenerator } from 'blockly/javascript';
+
 interface JSConverter {
     setTemplate: (temp: template) => void;
-    convert: ({js, workspace}: { workspace: any, js: any }) => void;
+    convert: ({ workspace, elements }: { workspace: any, elements: [string, string][] }) => void;
 }
 
 type template = {
@@ -12,13 +14,13 @@ class JSConverter {
         let template: template;
 
         this.setTemplate = (temp: template) => template = temp;
-        this.convert = ({js, workspace}) => {
+        this.convert = ({ workspace, elements }) => {
             let code = '';
-            template.nodes.forEach(node => {
+            elements.forEach(node => {
                 code += `const ${node} = document.querySelector('.${node}');\n`;
             });
 
-            code += js.workspaceToCode(workspace);
+            code += javascriptGenerator.workspaceToCode(workspace);
             return code;
         };
     }
