@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import Blockly from 'blockly';
-console.log(Blockly);
-
+// @ts-ignore 
+import { updateElementsDropdown } from './converters/js/dynamic';
 import web from './builders/web/main';
 import mobile from './builders/mobile/main';
 import desktop from './builders/desktop/main';
@@ -45,9 +45,7 @@ class ProjectGenerator {
                 })
                 return;
             }
-
-            console.log(blocks);
-
+            
             //generating html code
             Swal.fire({
                 title: 'Building interfaces...',
@@ -59,20 +57,24 @@ class ProjectGenerator {
             });
             let html = new HTMLConverter();
             html.setTarget(html.generateDropped(design));
-            let htmlCode = html.convert();
-
+            
             //fetching toolbox file
             const { text: xml } = await window.electron.fetch(import.meta.env.VITE_SERVER_URL + '/xml', { method: 'POST' });
             
-            const workspace = new Blockly.WorkspaceSvg(new Blockly.Options({ toolbox: xml, zoom: { controls: true, wheel: true, startScale: 1, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }}))
-            Blockly.serialization.workspaces.load(blocks, workspace);
+            const workspace = new Blockly.Workspace(new Blockly.Options({ toolbox: xml, zoom: { controls: true, wheel: true, startScale: 1, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }}))            
+            // dynamically setting each DOM's based blockly blocks a custom dropdown with your elements
+            updateElementsDropdown({ dropdown: blocks.elems });
 
+            Blockly.serialization.workspaces.load(blocks, workspace);
+            
             let js = new JSConverter();
-            let jsCode = js.convert({ workspace, elements: blocks.elements });
+            let jsCode = js.convert({ workspace, elements: blocks.elems });
             console.log(jsCode);
             
+            html.setJavaScript(jsCode);
             
-
+            let htmlCode = html.convert();
+            
             //creating project path
             let path = localStorage.getItem('projects_path') || window.electron.userData;
             let projectPath = window.electron.path.join(path, 'projects', id);

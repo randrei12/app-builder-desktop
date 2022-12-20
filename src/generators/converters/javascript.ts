@@ -1,4 +1,6 @@
 import { javascriptGenerator } from 'blockly/javascript';
+import './js/blocks.js';
+import './js/blocks_code';
 
 interface JSConverter {
     setTemplate: (temp: template) => void;
@@ -14,10 +16,10 @@ class JSConverter {
         let template: template;
 
         this.setTemplate = (temp: template) => template = temp;
-        this.convert = ({ workspace, elements }) => {
+        this.convert = ({ workspace, elements = [] }) => {
             let code = '';
             elements.forEach(node => {
-                code += `const ${node} = document.querySelector('.${node}');\n`;
+                code += `const ${node[1]} = document.querySelector('.${node[1]}');\n`;
             });
 
             code += javascriptGenerator.workspaceToCode(workspace);
