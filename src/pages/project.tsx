@@ -31,7 +31,7 @@ function Project() {
     }
 
     function build(e: any) {
-        let generator = new ProjectGenerator({ platform: e.target.parentElement.dataset.platform, project, id: id as string });
+        let generator = new ProjectGenerator({ platform: e.target.parentElement.dataset.platform, os: e.target.dataset.os, project, id: id as string });
         generator.build();
     }
 
@@ -42,22 +42,22 @@ function Project() {
                 <div className="buildSection">
                     <span>Web</span>
                     <div data-platform="web">
-                        <button onClick={build}><i className="fa-solid fa-globe"></i> Build as website</button>
+                        <button onClick={build} data-os="web"><i className="fa-solid fa-globe"></i> Build as website</button>
                     </div>
                 </div>
                 <div className="buildSection">
                     <span>Desktop</span>
                     <div data-platform="desktop">
-                        <button onClick={build}><i className="fa-brands fa-apple"></i> Build for macOS</button>
-                        <button onClick={build}><i className="fa-brands fa-windows"></i> Build for Windows</button>
-                        <button onClick={build}><i className="fa-brands fa-linux"></i> Build for Linux</button>
+                        <button onClick={build} data-os="macos"><i className="fa-brands fa-apple"></i> Build for macOS</button>
+                        <button onClick={build} data-os="windows"><i className="fa-brands fa-windows"></i> Build for Windows</button>
+                        <button onClick={build} data-os="linux"><i className="fa-brands fa-linux"></i> Build for Linux</button>
                     </div>
                 </div>
                 <div className="buildSection">
                     <span>Mobile</span>
                     <div data-platform="mobile">
-                        <button onClick={build}><i className="fa-brands fa-apple"></i> Build for iOS</button>
-                        <button onClick={build}><i className="fa-brands fa-android"></i> Build for Android</button>
+                        <button onClick={build} data-os="ios"><i className="fa-brands fa-apple"></i> Build for iOS</button>
+                        <button onClick={build} data-os="android"><i className="fa-brands fa-android"></i> Build for Android</button>
                     </div>
                 </div>
             </div>

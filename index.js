@@ -84,4 +84,3 @@ ipcMain.handle('fetch', async (e, args) => {
     return { status, statusText, text };
 });
 ipcMain.handle('userData', () => app.getPath('userData'));
-ipcMain.handle('path', () => path);

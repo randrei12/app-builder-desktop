@@ -7,6 +7,10 @@ import Project from './pages/project';
 declare global {
     interface Window {
         electron: {
+            run: {
+                npmInstall: (path: string) => Promise<string>
+                npmRun: (path: string, command: string) => Promise<string>
+            },
             quit: () => void;
             fetch: (...args: any[]) => any;
             isPath: (path: string) => boolean;
@@ -14,6 +18,8 @@ declare global {
             userData: string;
             makePath(path: string, obj?: object): void;
             createFile(file: string, data: string): void;
+            beep: () => void;
+            showItemInFolder: (path: string) => Promise<void>;
         }
     }
 

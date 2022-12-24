@@ -12,16 +12,6 @@ interface customHTML extends HTMLElement {
     src: string;
 }
 
-// function droppedToElem(elem: any) {
-//     let html = elem.getElement();
-//     let clone = html.cloneNode();
-//     clone.setAttribute('src', html.getAttribute('src') || '');
-//     if (!['screen', 'div'].includes(elem.type)) clone.innerText = html.innerText;
-//     clone.setAttribute('class', elem.id);
-//     elem.children.get().forEach((child: any) => clone.append(droppedToElem(child)));
-//     return clone;
-// }
-
 class HTMLConverter {
     constructor() {
         let target: any;
