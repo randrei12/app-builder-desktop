@@ -1,8 +1,7 @@
-const web = { 
-    type: 'web',
+const web = {
     createFiles: async (path:string, html: 'string') => {
         //create html file
-        await window.electron.createFile(window.electron.path.join(path, 'index.html'), html);
+        window.electron.createFile(window.electron.path.join(path, 'index.html'), html);
     }
 };
 

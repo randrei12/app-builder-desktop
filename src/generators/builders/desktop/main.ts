@@ -2,7 +2,6 @@ import electronTemplate from './file_templates/electron';
 import npmPackageTemplate from './file_templates/package';
 
 const desktop = {
-    type: 'desktop',
     createFiles: (path: string, html: string) => {
         //create html file
         window.electron.createFile(window.electron.path.join(path, 'index.html'), html);

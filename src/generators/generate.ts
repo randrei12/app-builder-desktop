@@ -98,12 +98,14 @@ class ProjectGenerator {
 
             try {
                 await platform.install?.(projectPath);
-            } catch {
+            } catch (e){
                 Swal.fire({
                     title: 'Error',
                     text: "The project dependencies could not be installed",
                     icon: 'error'
                 });
+                console.log(e);
+                
                 return;
             }
 
@@ -111,6 +113,7 @@ class ProjectGenerator {
                 title: `Building project for ${plat}...`,
             });
             Swal.showLoading(null);
+            
             try {
                 await platform.build?.(projectPath, os);
             } catch (e) {
@@ -123,10 +126,15 @@ class ProjectGenerator {
                 
                 return;
             }
-
+            
             window.electron.beep();
-            window.electron.showItemInFolder(projectPath);
-            Swal.close();
+            window.electron.openPath(window.electron.path.join(projectPath, 'dist'));
+
+            Swal.fire({
+                title: 'Success',
+                text: 'Project successfully built',
+                icon:'success'
+            });
         }
     }
 }

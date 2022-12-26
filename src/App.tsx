@@ -10,6 +10,8 @@ declare global {
             run: {
                 npmInstall: (path: string) => Promise<string>
                 npmRun: (path: string, command: string) => Promise<string>
+                npxCap: (path: string, commands: string[]) => Promise<string>
+                nativeAndroid: (path: string, androidPath: string) => Promise<string>
             },
             quit: () => void;
             fetch: (...args: any[]) => any;
@@ -20,6 +22,7 @@ declare global {
             createFile(file: string, data: string): void;
             beep: () => void;
             showItemInFolder: (path: string) => Promise<void>;
+            openPath: (path: string) => Promise<string>;
         }
     }
 
